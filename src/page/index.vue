@@ -64,15 +64,23 @@
         this.flag = true
       },
       mousedown(e) {
-        this.e = e
+        this.e = this.getNode(e)
         this.mouse = true
+      },
+      getNode(e) {
+        let target = e.target
+        while(target.className != 'main') {
+          target = target.parentNode
+        }
+        if(target.className === 'main') {
+          return target
+        }
       },
       mousemove(e) {
         if(!this.mouse) return
         e.stopPropagation()
-        console.log(e)
-        this.e.target.parentNode.style.top = e.clientY + 'px'
-        this.e.target.parentNode.style.left = (e.clientX - 430) + 'px'
+        this.e.style.top = e.clientY + 'px'
+        this.e.style.left = (e.clientX - 430) + 'px'
       },
       mouseup() {
         this.mouse = false
@@ -108,5 +116,6 @@
     float: right;
     border: 1px solid burlywood;
     position: relative;
+    overflow: hidden;
   }
 </style>
