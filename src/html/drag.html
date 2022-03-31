@@ -55,6 +55,16 @@
     //   e.preventDefault()
     //   this.insertBefore(e.target, dragDom)
     // }
+    document.getElementById('ul').ondragover = function(e) {
+      if(e.target.className === 'li') {
+        e.target.style.background = 'yellow'
+      }
+    }
+    document.getElementById('ul').ondragleave = function(e) {
+      if(e.target.className === 'li') {
+        e.target.style.background = '#00FFFF'
+      }
+    }
     document.getElementById('ul').ondrop = function(e) {
       e.preventDefault()
       let flag = isPos(e.target, dragDom)
@@ -62,6 +72,9 @@
         this.insertBefore(e.target, dragDom)
       }else{
         this.insertBefore(dragDom, e.target)
+      }
+      if(e.target.className === 'li') {
+        e.target.style.background = '#00FFFF'
       }
     }
     function dragover(e) {
